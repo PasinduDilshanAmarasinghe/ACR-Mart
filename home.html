@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ACR Mart - Home</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    html, body {
+      height: 100%;
+      background-image: url('piks/main.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      color: #f5f0e6;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(75, 46, 14, 0.7);
+      z-index: 0;
+    }
+
+     nav {
+      position: fixed;
+      top: 0;
+      height: 10%;
+      width: 100%;
+      background: #4B2E0E; /* solid brown */
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+      z-index: 10;
+    }
+
+    .nav-left img {
+      height: 120px;
+      display: block;
+    }
+
+    .nav-right a {
+      color: #f0d87c;
+      text-decoration: none;
+      margin-left: 2rem;
+      font-weight: 600;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    .nav-right a:hover,
+    .nav-right a:focus {
+      color: #b69122; /* darker gold */
+    }
+
+    .nav-right a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background: #f0d87c;
+      left: 0;
+      bottom: -4px;
+      transition: width 0.3s ease;
+    }
+
+    .nav-right a:hover::after,
+    .nav-right a:focus::after {
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      top: 100px;
+      max-width: 600px;
+      margin: 5rem auto 3rem auto;
+      background: rgba(75, 46, 14, 0.85);
+      padding: 4rem 3rem;
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+      text-align: center;
+      color: #f0e4b8;
+      user-select: none;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      margin-bottom: 2.5rem;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+    }
+
+    .hero button {
+      background-color: #D1A83F;
+      color: #4B2E0E;
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      padding: 1rem 3rem;
+      border: none;
+      border-radius: 40px;
+      cursor: pointer;
+      box-shadow: 0 7px 20px rgba(209,168,63,0.7);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .hero button:hover {
+      background-color: #b69122;
+      transform: scale(1.05);
+    }
+
+    /* Footer */
+    footer {
+      background-color: #222;
+      color: #fff;
+      padding: 40px 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .footer-container {
+      display: flex;
+      justify-content:end;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .footer-container div {
+      flex: 1;
+      margin: 15px;
+      min-width: 220px;
+    }
+
+    .footer-container h3 {
+      border-bottom: 2px solid #ffcc00;
+      padding-bottom: 8px;
+      margin-bottom: 15px;
+      font-size: 18px;
+    }
+
+    .footer-container ul {
+      list-style: none;
+    }
+
+    .footer-container ul li {
+      margin: 8px 0;
+    }
+
+    .footer-container ul li a {
+      color: #ddd;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .footer-container ul li a:hover {
+      color: #ffcc00;
+    }
+
+    .footer-contact p {
+      margin: 6px 0;
+    }
+
+    .footer-social a img {
+      width: 28px;
+      margin-right: 10px;
+      filter: brightness(0) invert(1);
+      transition: 0.3s;
+    }
+
+    .footer-social a img:hover {
+      filter: brightness(0) invert(0.8) sepia(1) hue-rotate(30deg) saturate(5);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding: 15px 0;
+      border-top: 1px solid #444;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #bbb;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .hero {
+        margin: 3rem 1.5rem 2rem 1.5rem;
+        padding: 3rem 2rem;
+      }
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+      .hero button {
+        font-size: 1.1rem;
+        padding: 0.85rem 2.5rem;
+      }
+      nav .nav-right a {
+        margin-left: 1rem;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-left">
+      <a href="index.php">
+        <img src="piks/logo.png" alt="ACR Mart Logo" />
+      </a>
+    </div>
+    <div class="nav-right">
+      <a href="home.html">Home</a>
+      <a href="products.php">Products</a>
+      <a href="about.html">About Us</a>
+      <a href="cart.php">🛒 Cart</a>
+      <a href="signin.php">Sign In</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" role="main" aria-label="Fresh Deals Call to Action">
+    <h1>Fresh Deals Everyday</h1>
+    <button onclick="location.href='products.php'">Shop Now</button>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-about">
+        <h3>About Us</h3>
+        <p>We are your one-stop online store, offering high-quality products at affordable prices with fast delivery and excellent customer service.</p>
+      </div>
+
+      <div class="footer-links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.php">Home</a></li>
+          <li><a href="products.html">Shop</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="faq.html">FAQs</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-contact">
+        <h3>Contact Us</h3>
+        <p>Email: support@acrmart.com</p>
+        <p>Phone: +94 77 123 4567</p>
+        <p>Address: Colombo, Sri Lanka</p>
+      </div>
+
+      <div class="footer-social">
+        <h3>Follow Us</h3>
+        <a href="#"><img src="piks/fb.png" alt="Facebook"></a>
+        <a href="#"><img src="piks/inst.png" alt="Instagram"></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 ACR Mart. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

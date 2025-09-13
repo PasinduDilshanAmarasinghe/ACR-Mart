@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ACR Mart - About Us</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    html, body {
+      height: 100%;
+      position: relative;
+      min-height: 100vh;
+      color: #4B2E0E;
+      overflow-x: hidden;
+    }
+
+    /* Background slideshow container */
+    .bg-slideshow {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .bg-slideshow img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      animation: fade 20s infinite;
+    }
+
+    .bg-slideshow img:nth-child(1) { animation-delay: 0s; }
+    .bg-slideshow img:nth-child(2) { animation-delay: 5s; }
+    .bg-slideshow img:nth-child(3) { animation-delay: 10s; }
+    .bg-slideshow img:nth-child(4) { animation-delay: 15s; }
+
+    @keyframes fade {
+      0% { opacity: 0; }
+      10% { opacity: 1; }
+      25% { opacity: 1; }
+      35% { opacity: 0; }
+      100% { opacity: 0; }
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      height: 10%;
+      width: 100%;
+      background: #4B2E0E;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+      z-index: 10;
+    }
+
+    .nav-left img {
+      height: 120px;
+      display: block;
+    }
+
+    .nav-right a {
+      color: #f0d87c;
+      text-decoration: none;
+      margin-left: 2rem;
+      font-weight: 600;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    .nav-right a:hover,
+    .nav-right a:focus {
+      color: #b69122;
+    }
+
+    .nav-right a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background: #f0d87c;
+      left: 0;
+      bottom: -4px;
+      transition: width 0.3s ease;
+    }
+
+    .nav-right a:hover::after,
+    .nav-right a:focus::after {
+      width: 100%;
+    }
+
+    main {
+      position: relative;
+      max-width: 800px;
+      margin: 100px auto 3rem auto;
+      padding: 2rem 2.5rem;
+      background: rgba(249,243,210,0.9); /* semi-transparent for background slideshow */
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(75, 46, 14, 0.2);
+      color: #4B2E0E;
+      z-index: 1;
+    }
+
+    main h2 {
+      font-size: 2.8rem;
+      font-weight: 900;
+      margin-bottom: 1.5rem;
+      letter-spacing: 2px;
+      text-align: center;
+      color: #4B2E0E;
+    }
+
+    main p {
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: #4B2E0E;
+      text-align: justify;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      background: #4B2E0E;
+      color: #f0d87c;
+      font-weight: 500;
+      user-select: none;
+      box-shadow: 0 -3px 10px rgba(0,0,0,0.2);
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      z-index: 10;
+    }
+
+    @media (max-width: 600px) {
+      main {
+        margin: 80px 1.5rem 4rem 1.5rem;
+        padding: 1.5rem 1.5rem 2rem 1.5rem;
+      }
+
+      main h2 {
+        font-size: 2rem;
+      }
+
+      main p {
+        font-size: 1rem;
+      }
+    }
+
+    /* Footer styling same as before */
+    .footer-container {
+      display: flex;
+      justify-content: end;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .footer-container div {
+      flex: 1;
+      margin: 15px;
+      min-width: 220px;
+    }
+
+    .footer-container h3 {
+      border-bottom: 2px solid #ffcc00;
+      padding-bottom: 8px;
+      margin-bottom: 15px;
+      font-size: 18px;
+    }
+
+    .footer-container ul {
+      list-style: none;
+    }
+
+    .footer-container ul li {
+      margin: 8px 0;
+    }
+
+    .footer-container ul li a {
+      color: #ddd;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .footer-container ul li a:hover {
+      color: #ffcc00;
+    }
+
+    .footer-contact p {
+      margin: 6px 0;
+    }
+
+    .footer-social a img {
+      width: 28px;
+      margin-right: 10px;
+      filter: brightness(0) invert(1);
+      transition: 0.3s;
+    }
+
+    .footer-social a img:hover {
+      filter: brightness(0) invert(0.8) sepia(1) hue-rotate(30deg) saturate(5);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding: 15px 0;
+      border-top: 1px solid #444;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #bbb;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background slideshow -->
+  <div class="bg-slideshow">
+    <img src="piks/about1.jpg" alt="Background 1">
+    <img src="piks/about2.jpg" alt="Background 2">
+    <img src="piks/about 3.jpg" alt="Background 3">
+    <img src="piks/about 4.jpg" alt="Background 4">
+  </div>
+
+  <nav>
+    <div class="nav-left">
+      <a href="home.html">
+        <img src="piks/logo.png" alt="ACR Mart Logo" />
+      </a>
+    </div>
+    <div class="nav-right">
+      <a href="home.html">Home</a>
+      <a href="products.php">Products</a>
+      <a href="about.html">About Us</a>
+      <a href="cart.php">🛒 Cart</a>
+      <a href="signin.php">Sign In</a>
+    </div>
+  </nav>
+
+  <main role="main" aria-label="About ACR Mart">
+    <h2>About ACR Mart</h2>
+    <p>
+      Welcome to ACR Prime Mart, your neighborhood grocery store. We offer a wide range of fresh produce, quality meats, and everyday essentials. Come experience the difference!
+    </p>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-about">
+        <h3>About Us</h3>
+        <p>We are your one-stop online store, offering high-quality products at affordable prices with fast delivery and excellent customer service.</p>
+      </div>
+
+      <div class="footer-links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.php">Shop</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="faq.html">FAQs</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-contact">
+        <h3>Contact Us</h3>
+        <p>Email: support@acrmart.com</p>
+        <p>Phone: +94 77 123 4567</p>
+        <p>Address: Colombo, Sri Lanka</p>
+      </div>
+
+      <div class="footer-social">
+        <h3>Follow Us</h3>
+        <a href="#"><img src="piks/fb.png" alt="Facebook"></a>
+        <a href="#"><img src="piks/inst.png" alt="Instagram"></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 ACR Mart. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

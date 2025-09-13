@@ -1,0 +1,73 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.hero-section {
+    display: flex;
+    height: 100vh;
+    position: relative;
+    background: #5C4033;
+    overflow: hidden;
+}
+
+/* Gold curved section */
+.hero-section::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30%; /* a bit more than 25% to cover the curve */
+    height: 100%;
+    background: #D4AF37;
+    clip-path: ellipse(80% 100% at 0% 50%);
+}
+
+/* Left content (75% area) */
+.left-content {
+    flex: 0 0 75%;
+    padding: 5rem;
+    color: #f5deb3;
+    z-index: 1;
+}
+
+.left-content h1 {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+}
+
+.left-content p {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.left-content button {
+    padding: 0.8rem 2rem;
+    background: #D4AF37;
+    border: none;
+    color: #5C4033;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.left-content button:hover {
+    background: #c49a2e;
+}
+
+/* Right content (image) */
+.right-content {
+    flex: 0 0 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    padding-right: 1rem;
+}
+
+.right-content img {
+    max-width: 90%;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.3);
+}

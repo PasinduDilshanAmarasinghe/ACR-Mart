@@ -1,0 +1,381 @@
+<?php if(empty($cart)) : ?>
+    <p>Your cart is empty.</p>
+<?php else: ?>
+    <?php foreach($cart as $id => $item): ?>
+        <div class="cart-item">
+            <img src="<?php echo $item['image_url']; ?>" alt="<?php echo $item['name']; ?>">
+            <div>
+                <h4><?php echo $item['name']; ?></h4>
+                <p>Rs. <?php echo $item['price']; ?> x <?php echo $item['quantity']; ?></p>
+            </div>
+        </div>
+    <?php endforeach; ?>
+<?php endif; ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ACR Mart - Cart</title>
+  <style>
+    /* Reset & base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: #fff;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      height: 10%;
+      width: 100%;
+      background: #4B2E0E;
+      padding: 0.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+      z-index: 10;
+    }
+
+    .nav-left img {
+      height: 120px;
+    }
+
+    .nav-right a {
+      color: #e6c87c;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      margin-left: 1.5rem;
+    }
+
+    .nav-right a:hover {
+      color: #fff;
+    }
+
+    main {
+      padding: 100px 2rem 2rem;
+      max-width: 900px;
+      margin: auto;
+      flex: 1;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 900;
+      margin-bottom: 2rem;
+      color: #4B2E0E;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 2rem;
+      user-select: none;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px 15px;
+      text-align: center;
+      font-weight: 600;
+      color: #4B2E0E;
+    }
+
+    th {
+      background-color: #f0d87c;
+    }
+
+    tfoot td {
+      font-weight: 900;
+      font-size: 1.2rem;
+      color: #d1a83f;
+    }
+
+    /* Delivery options */
+    .delivery-options {
+      margin-bottom: 2rem;
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      user-select: none;
+    }
+
+    .delivery-options label {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #4B2E0E;
+      cursor: pointer;
+    }
+
+    .delivery-options input[type="radio"] {
+      margin-right: 0.5rem;
+      cursor: pointer;
+    }
+
+    #checkout-btn {
+      display: block;
+      margin: 0 auto;
+      background-color: #4B2E0E;
+      color: #f0d87c;
+      border: none;
+      padding: 0.8rem 3rem;
+      font-size: 1.2rem;
+      font-weight: 700;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(75,46,14,0.7);
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+
+    #checkout-btn:hover {
+      background-color: #3a2207;
+    }
+
+    /* Empty cart message */
+    #empty-message {
+      text-align: center;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #a05200;
+      margin-top: 3rem;
+      user-select: none;
+    }
+
+    footer {
+      background-color: #3a2207;
+      color: #fff;
+      padding: 40px 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .footer-container {
+      display: flex;
+      justify-content:end;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .footer-container div {
+      flex: 1;
+      margin: 15px;
+      min-width: 220px;
+    }
+
+    .footer-container h3 {
+      border-bottom: 2px solid #ffcc00;
+      padding-bottom: 8px;
+      margin-bottom: 15px;
+      font-size: 18px;
+    }
+
+    .footer-container ul {
+      list-style: none;
+    }
+
+    .footer-container ul li {
+      margin: 8px 0;
+    }
+
+    .footer-container ul li a {
+      color: #ddd;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .footer-container ul li a:hover {
+      color: #ffcc00;
+    }
+
+    .footer-contact p {
+      margin: 6px 0;
+    }
+
+    .footer-social a img {
+      width: 28px;
+      margin-right: 10px;
+      filter: brightness(0) invert(1);
+      transition: 0.3s;
+    }
+
+    .footer-social a img:hover {
+      filter: brightness(0) invert(0.8) sepia(1) hue-rotate(30deg) saturate(5);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding: 15px 0;
+      border-top: 1px solid #444;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #bbb;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-left">
+      <a href="products.html"><img src="piks/logo.png" alt="ACR Mart Logo" /></a>
+    </div>
+    <div class="nav-right">
+      <a href="products.html">Products</a>
+      <a href="signin.html">Sign In</a>
+    </div>
+  </nav>
+
+  <main>
+    <h2>Your Cart</h2>
+
+    <table id="cart-table" aria-label="Shopping Cart Table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Unit Price (Rs.)</th>
+          <th>Total Price (Rs.)</th>
+        </tr>
+      </thead>
+      <tbody id="cart-body">
+        <!-- Cart items will be injected here -->
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3">Grand Total</td>
+          <td id="grand-total">Rs. 0</td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <p id="empty-message" style="display:none;">Your cart is empty. Please add some products first.</p>
+
+    <div class="delivery-options" role="radiogroup" aria-label="Select delivery option">
+      <label>
+        <input type="radio" name="delivery" value="delivery" checked />
+        Deliver to Customer
+      </label>
+      <label>
+        <input type="radio" name="delivery" value="pickup" />
+        pick up
+      </label>
+    </div>
+
+    <button id="checkout-btn" aria-label="Proceed to checkout">Checkout</button>
+  </main>
+
+  <script>
+    const cartBody = document.getElementById('cart-body');
+    const grandTotalElem = document.getElementById('grand-total');
+    const emptyMessage = document.getElementById('empty-message');
+    const checkoutBtn = document.getElementById('checkout-btn');
+
+    // Load cart from localStorage or empty array
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    function renderCart() {
+      cartBody.innerHTML = '';
+
+      if(cart.length === 0) {
+        document.getElementById('cart-table').style.display = 'none';
+        emptyMessage.style.display = 'block';
+        checkoutBtn.disabled = true;
+        return;
+      }
+
+      document.getElementById('cart-table').style.display = 'table';
+      emptyMessage.style.display = 'none';
+      checkoutBtn.disabled = false;
+
+      let grandTotal = 0;
+
+      cart.forEach(item => {
+        const totalPrice = item.price * item.quantity;
+        grandTotal += totalPrice;
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${item.name}</td>
+          <td>${item.quantity}</td>
+          <td>Rs. ${item.price.toFixed(2)}</td>
+          <td>Rs. ${totalPrice.toFixed(2)}</td>
+        `;
+        cartBody.appendChild(tr);
+      });
+
+      grandTotalElem.textContent = `Rs. ${grandTotal.toFixed(2)}`;
+    }
+
+    renderCart();
+
+    checkoutBtn.addEventListener('click', () => {
+      if(cart.length === 0) {
+        alert("Your cart is empty. Please add products before checkout.");
+        return;
+      }
+
+      // Get delivery option
+      const deliveryOption = document.querySelector('input[name="delivery"]:checked').value;
+
+      // Here you can add more logic like collecting customer info, payment etc.
+      alert(`Order placed successfully!\nDelivery option: ${deliveryOption}\nTotal amount: ${grandTotalElem.textContent}`);
+
+      // Clear cart after checkout
+      cart = [];
+      localStorage.removeItem('cart');
+      renderCart();
+    });
+  </script>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-about">
+        <h3>About Us</h3>
+        <p>We are your one-stop online store, offering high-quality products at affordable prices with fast delivery and excellent customer service.</p>
+      </div>
+
+      <div class="footer-links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Shop</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="faq.html">FAQs</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-contact">
+        <h3>Contact Us</h3>
+        <p>Email: support@acrmart.com</p>
+        <p>Phone: +94 77 123 4567</p>
+        <p>Address: Colombo, Sri Lanka</p>
+      </div>
+
+      <div class="footer-social">
+        <h3>Follow Us</h3>
+        <a href="#"><img src="piks/fb.png" alt="Facebook"></a>
+        <a href="#"><img src="piks/inst.png" alt="Instagram"></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 ACR Mart. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

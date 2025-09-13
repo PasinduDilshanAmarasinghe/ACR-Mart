@@ -1,0 +1,198 @@
+<?php
+// register.php
+session_start();
+include 'db.php'; // Your database connection file
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $fullname = trim($_POST['fullname']);
+    $email = trim($_POST['email']);
+    $phone = trim($_POST['phone']);
+    $address = trim($_POST['address']);
+    $password = $_POST['password'];
+    $confirm_password = $_POST['confirm-password'];
+
+    if ($password !== $confirm_password) {
+        echo "<script>alert('Passwords do not match.'); window.history.back();</script>";
+        exit;
+    }
+
+    // Hash the password
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+    // Insert user into database
+    $stmt = $conn->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
+    $stmt->bind_param("sss", $fullname, $email, $hashed_password);
+
+    if ($stmt->execute()) {
+        echo "<script>alert('Account created successfully! Please login.'); window.location='signin.html';</script>";
+    } else {
+        echo "<script>alert('Error: Email already exists or database issue.'); window.history.back();</script>";
+    }
+
+    $stmt->close();
+    $conn->close();
+}
+?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ACR Mart - Create Account</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    html, body {
+      height: 100%;
+      background-image: url('piks/as.jpg'); /* same background */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(75, 46, 14, 0.7);
+      z-index: 0;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: #4B2E0E;
+      padding: 0.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+      z-index: 10;
+    }
+
+    .nav-left img {
+      height: 120px;
+      display: block;
+    }
+
+    .nav-right a {
+      color: #e6c87c;
+      text-decoration: none;
+      font-weight: 600;
+      margin-left: 1.5rem;
+    }
+
+    .nav-right a:hover {
+      color: #fff;
+    }
+
+    .form-container {
+      position: relative;
+      z-index: 1;
+      max-width: 420px;
+      margin: 8rem auto;
+      background: rgba(75, 46, 14, 0.85);
+      padding: 2.5rem;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+      color: #f0e4b8;
+    }
+
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+      color: #f0d87c;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: none;
+      font-size: 1rem;
+    }
+
+    textarea {
+      resize: none;
+    }
+
+    button {
+      width: 100%;
+      background-color: #D1A83F;
+      color: #4B2E0E;
+      padding: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #b69122;
+    }
+
+    p {
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    p a {
+      color: #f0d87c;
+      text-decoration: none;
+    }
+
+    p a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>Create an Account</h2>
+    <form action="register.php" method="post">
+      <label for="fullname">Full Name</label>
+      <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
+
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+
+      <label for="address">Address</label>
+      <textarea id="address" name="address" rows="3" placeholder="Enter your address" required></textarea>
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" placeholder="Enter password" required>
+
+      <label for="confirm-password">Confirm Password</label>
+      <input type="password" id="confirm-password" name="confirm-password" placeholder="Re-enter password" required>
+
+      <button type="submit">Sign Up</button>
+    </form>
+
+    <p>Already have an account? <a href="signin.php">Login here</a></p>
+  </div>
+
+</body>
+</html>
